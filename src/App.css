@@ -3,9 +3,9 @@
 }
 
 .purchase-card {
-  width: 350px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding: 1em;
+  float: right;
 }
 
 .purchase-card > .show-grid {
@@ -23,4 +23,22 @@
 
 .promo-code-button:focus {
   outline: none;
+}
+
+.items {
+  display: inline;
+}
+
+.item-grid {
+  width: 250px;
+  display: inline-block;
+  margin: 0 10px 10px 10px
+}
+
+.item-grid > .well {
+  margin-bottom: 0;
+}
+
+img {
+  object-fit: cover;
 }

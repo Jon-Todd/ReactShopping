@@ -2,7 +2,9 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 // Import thunk 
 import thunk from 'redux-thunk';
+import cartReducer from './components/features/cart/cartreducer'
 import rootReducer from './reducers';
+
 
 const initialState = {};
 
@@ -13,7 +15,7 @@ const store = createStore(
     initialState,
     compose(
         applyMiddleware(...middleware),
-        window.devToolExtension ? window.devToolsExtension() : f => f
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(),
     )
 );
 
