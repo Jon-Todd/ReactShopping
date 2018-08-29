@@ -20,7 +20,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      total: 100,
+      total: 0,
       estimatedTotal: 0,
       disablePromoButton: false,
       cartItems: []
@@ -43,82 +43,68 @@ class App extends Component {
   }
 
   giveDiscountHandler = () => {
-    console.log('PromoCode:', this.state.promoCode)
-    if (this.props.promoCode === "DISCOUNT") {
-      this.setState(
-      {
-        estimatedTotal: this.state.estimatedTotal - 5
-      },
-      function() {
-        this.setState({
-          disablePromoButton: true
-        });
-      });
-    }
-  };
-
-  giveDiscountHandler = () => {
-    if(this.props.promoCode === 'DISCOUNT') {
-      this.setState({
-        estimatedTotal: this.state.estimatedTotal - 5,
-      },
-    function() {
-      this.setState({
-        disablePromoButton: true
-      });
-    })
-    }
-  };
-
-  checkPrice = (price) => {
-    return this.props.price
+      if(this.props.promoCode === 'DISCOUNT') {
+        if (this.props.cart === undefined || this.props.cart.length == 0) {
+          return 0
+        } else {
+          setTimeout(function() {
+            var items = this.props.cart;
+            var i = 0
+            var totalPrice = 0
+            for (i = 0; i < items.length; i++) {
+              var totalPrice = totalPrice + items[i].quantity * items[i].price
+            }
+    
+            totalPrice -= 5 
+            
+            this.setState({
+              estimatedTotal: totalPrice,
+              disablePromoButton: true
+            });
+          }.bind(this), 10);
+        
+      }
+    };
   }
-
   //get total of items
   getTotalOfItems = () => {
-  
-    if (this.props.cart === undefined || this.props.cart.length == 0) {
-        return 0
-    } else {
-      
-      const items = this.props.cart
-      console.log('items:', items)
-      var itemPrices = items.map(function (item) {
-        console.log(item.price)
-        return items.price
-      });
 
-      var totalPrice = items.reduce(function (accumulator, item) {
-        return accumulator + item.price;
-      }, 0);
-      
-
-      const reducer = (accumulator, currentValue) => accumulator + currentValue;
-      // console.log('cart',this.props.cart[0].price)
-      // //filter prices into array
-      // const prices = this.props.cart.filter(checkPrice);
-  
-      return totalPrice
-      };
+      setTimeout(function() {
+        var items = this.props.cart;
+        var i = 0
+        var totalPrice = 0
+        for (i = 0; i < items.length; i++) {
+          var totalPrice = totalPrice + items[i].quantity * items[i].price
+        }
+        
+        this.setState({
+          estimatedTotal: totalPrice,
+          disablePromoButton: false
+        });
+      }.bind(this), 10);
   }
-
-  // .toFixed(2)
 
   render() {
     return (
       <div className="container">
         <Col md={9} className="items">
-          {/* <ItemIndex initialitems={this.props.initialitems} cartItems={this.props.cart}/> */}
-          <ProductListing products={this.props.initialitems} />
+          <ProductListing 
+          products={this.props.initialitems} 
+          getTotal={this.getTotalOfItems}
+          />
         </Col>
         <Col md={3} className="purchase-card">
           <SubTotal price={this.state.total.toFixed(2)} />
           <hr />
-          <EstimatedTotal price={this.getTotalOfItems()} />
-          <ItemDetails price={this.state.estimatedTotal.toFixed(2)}/>
+          <EstimatedTotal 
+            price={this.state.estimatedTotal.toFixed(2)} />
+          <ItemDetails 
+            price={this.state.estimatedTotal.toFixed(2)}
+            getPrice={this.getTotalOfItems }
+          />
           <hr />
           <PromoCodeDiscount 
-            giveDiscount={ () => this.giveDiscountHandler() }
+            giveDiscount={this.giveDiscountHandler }
             isDisabled={this.state.disablePromoButton}
           />
         </Col>

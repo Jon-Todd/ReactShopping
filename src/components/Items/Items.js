@@ -28,15 +28,17 @@ export default function ProductListItem(props) {
                                     <br />
                                     Qty: {props.product.stock}
                                     <AddBtn  
-                                        cartItem={props.cartItem} 
                                         product={props.product}
                                         addToCart={props.addToCart}
+                                        getTotal={props.getTotal}
+                                        onClick={() => {this.props.getTotal; console.log('item propwe', this.props.getTotal)}}
                                     />
                                     {
                                         props.cartItem
                                         ? <RemoveBtn  
                                         cartItem={props.cartItem} 
                                         product={props.product}
+                                        getTotal={props.getTotal}
                                         removeFromCart={props.removeFromCart}
                                     />
                                     : null

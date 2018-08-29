@@ -6,7 +6,7 @@ export default function AddButton(props) {
         block
         bsStyle="success"
         className="btn-round"
-        onClick={() => props.addToCart(props.product)}
+        onClick={() => {props.addToCart(props.product); props.getTotal(); console.log('something', props.getTotal)}}
         >
         Add To Cart ({
         (props.cartItem && props.cartItem.quantity) || 0

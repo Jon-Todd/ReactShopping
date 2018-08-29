@@ -13,6 +13,8 @@ function ProductListing(props) {
           removeFromCart={props.removeFromCart}
           cartItem={props.cart.filter( cartItem => cartItem.key === product.key)[0]}
           key={product.key}
+          getTotal={props.getTotal}
+          onClick={props.getTotal}
         />)
     }
   </div>

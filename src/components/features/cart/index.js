@@ -21,12 +21,12 @@ function Cart(props) {
                     <td> { item.name }</td>
                     <td> { item.quantity }</td>
                     <td>
-                        <button onClick={(e) => props.addToCart(item)}>+</button>
-                        <button onClick={(e) => props.removeFromCart(item)}>-</button>
+                        <button onClick={ () => {props.addToCart(item); props.getPrice()} }>+</button>
+                        <button onClick={ () => {props.removeFromCart(item); props.getPrice()} }>-</button>
                     </td>
                     <td>
                         <button
-                            onClick={(e) => props.removeAllFromCart(item)}
+                            onClick={(e) => {props.removeAllFromCart(item); props.getPrice()}}
                         >
                             Remove all from cart
                         </button>
@@ -52,7 +52,7 @@ function mapDispatchToProps(dispatch) {
             dispatch({ type: 'REMOVE', payload: item })
         },
         removeAllFromCart: (item) => {
-            dispatch({ type: 'REMOVE', payload: item })
+            dispatch({ type: 'REMOVE_ALL', payload: item })
         }
     }
 }

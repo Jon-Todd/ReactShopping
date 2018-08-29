@@ -6,7 +6,7 @@ export default function RemoveButton(props) {
         block
         bsStyle="success"
         className="btn-round"
-        onClick={() => props.removeFromCart(props.cartItem)}
+        onClick={() => {props.removeFromCart(props.cartItem); props.getTotal(); console.log('something', props.getTotal)}}
         >
         Remove From Cart
     </Button>

@@ -21,7 +21,9 @@ export default class ItemDetails extends Component {
                 {this.state.open === false ? ` +` : ` -`}
                 </Button>
                 <Collapse in={this.state.open}>
-                    <Cart />
+                    <Cart 
+                    getPrice={this.props.getPrice}
+                    />
                 </Collapse>
             </div>
         )
