@@ -6,10 +6,10 @@ export default function AddButton(props) {
         block
         bsStyle="success"
         className="btn-round"
-        onClick={() => {props.addToCart(props.product); props.getTotal(); console.log('something', props.getTotal)}}
+        onClick={() => {props.addToCart(props.product); props.getTotal()}}
         >
-        Add To Cart ({
-        (props.cartItem && props.cartItem.quantity) || 0
+        Add ({
+        (props.cart && props.cart.quantity) || 0
         })
     </Button>
 }

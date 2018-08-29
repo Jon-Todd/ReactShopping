@@ -1,0 +1,67 @@
+.purchase-card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 1em;
+  float: right;
+  > .show-grid {
+    padding-bottom: 1.5em;
+  }
+  .well .media > .media-body {
+    .btn {
+      margin: 0 5px;
+    }
+    .removeAll {
+      float: right;
+      margin: 0;
+    }
+  }
+
+}
+
+.product-listing .itemButtons > .btn-round {
+  width: 40%;
+  display: inline-block;
+  margin: 0 2px 0 0;
+}
+
+.item-details-button:focus {
+  outline: none;
+}
+
+.promo-code-button:focus {
+  outline: none;
+}
+
+.items {
+  display: inline;
+}
+
+.item-grid {
+  width: 250px;
+  display: inline-block;
+  margin: 0 10px 10px 10px;
+  > .well {
+    margin-bottom: 0;
+    img {
+      object-fit: cover
+    }
+  }
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+.navbar {
+  border-radius: 0;
+  padding: 5px 0;
+}
+
+.footer {
+  background-color: #2574A9;
+  margin-top: 50px;
+  p {
+    text-align: center;
+    color: #fff;
+    margin: 15px 0px;
+  }
+}

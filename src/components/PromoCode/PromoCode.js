@@ -8,7 +8,9 @@ import {
     Col,
     FormGroup,
     ControlLabel,
-    FormControl 
+    FormControl,
+    Tooltip,
+    OverlayTrigger
 } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { handleChange } from '../../actions/promoCodeActions';
@@ -27,6 +29,12 @@ class PromoCodeDiscount extends Component {
     }
 
     render() {
+        const tooltip = (
+            <Tooltip id="tooltip">
+            <strong>DEBUG:</strong> Use DISCOUNT as a voucher code
+            </Tooltip>
+        );
+
         return(
             <div>
                 <Button
@@ -53,15 +61,17 @@ class PromoCodeDiscount extends Component {
                                                 onChange={this.handleChange} 
                                             />
                                         </FormGroup>
-                                        <Button
-                                            block
-                                            bsStyle="success"
-                                            className="btn-round"
-                                            disabled={this.props.isDisabled}
-                                            onClick={this.props.giveDiscount}
-                                        >
-                                        Apply
-                                        </Button>
+                                        <OverlayTrigger placement="bottom" overlay={tooltip}>
+                                            <Button
+                                                block
+                                                bsStyle="success"
+                                                className="btn-round"
+                                                disabled={this.props.isDisabled}
+                                                onClick={this.props.giveDiscount}
+                                            >
+                                            Apply
+                                            </Button>
+                                        </OverlayTrigger>
                                     </Form>
                                 </Col>
                             </Row>

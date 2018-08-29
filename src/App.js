@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Col } from 'react-bootstrap';
 
-import SubTotal from './components/Subtotal/Subtotal';
-import PickupSavings from './components/PickupSavings/PickupSavings';
+// Import components
 import EstimatedTotal from './components/EstimatedTotal/EstimatedTotal';
-import ItemIndex from './components/Items/itemsIndex';
+import FooterBottom from './components/Footer/Footer'
 import ItemDetails from './components/ItemDetails/ItemDetails';
+import Header from './components/Header/Header'
 import PromoCodeDiscount from './components/PromoCode/PromoCode';
-import { cartItemsWithQuantity } from './components/features/cart/index';
 import ProductListing from './components/Items/itemsIndex'
 
 import { connect } from 'react-redux';
@@ -27,7 +26,7 @@ class App extends Component {
     }
   }
 
-  // Get total of all items
+  // Set initial totoal
   componentDidMount = () => {
     this.setState({
       estimatedTotal: this.state.total
@@ -35,13 +34,13 @@ class App extends Component {
   }
 
   getInitialState = () => {
-    console.log(this.props.initialitems)
     return {
       items: this.props.initialitems,
     };
     
   }
 
+  // Give discount
   giveDiscountHandler = () => {
       if(this.props.promoCode === 'DISCOUNT') {
         if (this.props.cart === undefined || this.props.cart.length == 0) {
@@ -86,28 +85,31 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <Col md={9} className="items">
-          <ProductListing 
-          products={this.props.initialitems} 
-          getTotal={this.getTotalOfItems}
-          />
-        </Col>
-        <Col md={3} className="purchase-card">
-          <SubTotal price={this.state.total.toFixed(2)} />
-          <hr />
-          <EstimatedTotal 
-            price={this.state.estimatedTotal.toFixed(2)} />
-          <ItemDetails 
-            price={this.state.estimatedTotal.toFixed(2)}
-            getPrice={this.getTotalOfItems }
-          />
-          <hr />
-          <PromoCodeDiscount 
-            giveDiscount={this.giveDiscountHandler }
-            isDisabled={this.state.disablePromoButton}
-          />
-        </Col>
+      <div>
+        <Header />
+        <div className="container">
+          <Col md={9} className="items">
+            <ProductListing 
+            products={this.props.initialitems} 
+            getTotal={this.getTotalOfItems}
+            />
+          </Col>
+          <Col md={3} className="purchase-card">
+            <ItemDetails 
+              price={this.state.estimatedTotal.toFixed(2)}
+              getPrice={this.getTotalOfItems }
+            />
+            <hr />
+            <EstimatedTotal 
+              price={this.state.estimatedTotal.toFixed(2)} />
+            <hr />
+            <PromoCodeDiscount 
+              giveDiscount={this.giveDiscountHandler }
+              isDisabled={this.state.disablePromoButton}
+            />
+          </Col>
+        </div>
+        <FooterBottom />
       </div>
     );
   };

@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
-import { Col, Media, Well, Row, Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import React from 'react';
+import { Col, Media, Well, Row } from 'react-bootstrap';
 import AddBtn from './add-btn'
 import RemoveBtn from './remove-btn'
 
 
 
 export default function ProductListItem(props) {
-    
         return(
             <Col className="item-grid">
                 <Well>
@@ -27,23 +25,25 @@ export default function ProductListItem(props) {
                                     <strong> {`£${props.product.price}`} </strong>
                                     <br />
                                     Qty: {props.product.stock}
-                                    <AddBtn  
-                                        product={props.product}
-                                        addToCart={props.addToCart}
-                                        getTotal={props.getTotal}
-                                        onClick={() => {this.props.getTotal; console.log('item propwe', this.props.getTotal)}}
-                                    />
-                                    {
-                                        props.cartItem
-                                        ? <RemoveBtn  
-                                        cartItem={props.cartItem} 
-                                        product={props.product}
-                                        getTotal={props.getTotal}
-                                        removeFromCart={props.removeFromCart}
-                                    />
+                                    <div className="itemButtons">
+                                        <AddBtn  
+                                            product={props.product}
+                                            addToCart={props.addToCart}
+                                            getTotal={props.getTotal}
+                                            onClick={() => {this.props.getTotal}}
+                                            cart={props.cartItem}
+                                        />
+                                        {
+                                            props.cartItem
+                                            ? <RemoveBtn  
+                                            cartItem={props.cartItem} 
+                                            product={props.product}
+                                            getTotal={props.getTotal}
+                                            removeFromCart={props.removeFromCart}
+                                        />
                                     : null
                                     }
-                                    
+                                </div>
                                 </Col>
                             </Row>
                         </Media.Body>
@@ -52,21 +52,3 @@ export default function ProductListItem(props) {
             </Col>
         )
 }
-
-// const mapStateToProps = state => ({
-//     cart: state.item
-// });
-
-// function mapDispatchToProps(dispatch) {
-//     return {
-//         addToCart: (item) => {
-//             console.log(item);
-//             dispatch({ type: 'ADD', payload: item })
-//         },
-//         removeFromCart: (item) => {
-//             dispatch({ type: 'REMOVE', payload: item })
-//         }
-//     }
-// }
-
-// export default connect (mapStateToProps, mapDispatchToProps)(Item)

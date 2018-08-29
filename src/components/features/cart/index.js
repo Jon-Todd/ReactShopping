@@ -1,40 +1,36 @@
 import React from 'react'
 import { connect } from  'react-redux'
+import { Button, Well, Media } from 'react-bootstrap';
+
 
 function sort(items) {
     return items.sort((a, b) => a.key < b.key)
 }
 
 function Cart(props) {
-    return <table>
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>Quantity</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {
-                sort(props.cart).map(item => <tr>
-                    <td> { item.name }</td>
-                    <td> { item.quantity }</td>
-                    <td>
-                        <button onClick={ () => {props.addToCart(item); props.getPrice()} }>+</button>
-                        <button onClick={ () => {props.removeFromCart(item); props.getPrice()} }>-</button>
-                    </td>
-                    <td>
-                        <button
-                            onClick={(e) => {props.removeAllFromCart(item); props.getPrice()}}
-                        >
-                            Remove all from cart
-                        </button>
-                    </td>
-                </tr>)
-            }
-        </tbody>
-    </table>
+    return <div>
+        {
+            sort(props.cart).map(item =>
+                <Well bsSize="small">
+                    <Media>
+                        <Media.Left>
+                            <img
+                                width={64} height={64} src={item.src}
+                            />
+                        </Media.Left>
+                        <Media.Body>
+                            <Button bsStyle="link" className={'removeAll'} onClick={(e) => {props.removeAllFromCart(item); props.getPrice()}}>✖</Button>
+                            <p>{ item.name }</p>
+                            <p>Qty: { item.quantity }</p>
+                            <Button bsStyle="success" onClick={ () => {props.addToCart(item); props.getPrice()} }>+</Button>
+                            <Button bsStyle="warning" onClick={ () => {props.removeFromCart(item); props.getPrice()} }>-</Button>
+                        </Media.Body>
+                    </Media>
+                </Well>
+            )
+        }
+    </div>
+
 }
 
 function mapStateToProps(state) {

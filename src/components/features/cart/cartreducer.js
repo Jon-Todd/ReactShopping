@@ -2,10 +2,20 @@ const cartWithoutItem = (cart, item) => cart.filter(cartItem => cartItem.key !==
 const itemInCart = (cart, item) => cart.filter(cartItem => cartItem.key === item.key)[0]
 
 const addToCart = (cart, item) => {
+    console.log(cart);
+    console.log(item)
     const cartItem = itemInCart(cart, item)
-        return cartItem === undefined
-        ? [ ...cartWithoutItem(cart, item), { ...item, quantity: 1 }]
-        : [ ...cartWithoutItem(cart, item), { ...cartItem, quantity: cartItem.quantity + 1 }]
+    console.log(cartItem)
+    if (cartItem === undefined) {
+        return [...cartWithoutItem(cart, item), { ...item, quantity: 1 }]
+    } else {
+        // Do not add to quantity if it equals the same as the stock
+        if (cartItem.quantity === cartItem.stock) {
+            return [ ...cartWithoutItem(cart, item), { ...cartItem, quantity: cartItem.quantity + 0 }]
+        } else {
+            return [ ...cartWithoutItem(cart, item), { ...cartItem, quantity: cartItem.quantity + 1 }]
+        }
+    }
 }
 
 const removeFromCart = (cart, item) => {
