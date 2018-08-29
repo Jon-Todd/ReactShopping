@@ -11,11 +11,11 @@ function Cart(props) {
     return <div>
         {
             sort(props.cart).map(item =>
-                <Well bsSize="small">
+                <Well bsSize="small" key={item.key}>
                     <Media>
                         <Media.Left>
                             <img
-                                width={64} height={64} src={item.src}
+                                width={64} height={64} src={item.src} alt="Item description"
                             />
                         </Media.Left>
                         <Media.Body>

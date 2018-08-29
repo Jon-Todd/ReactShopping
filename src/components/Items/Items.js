@@ -30,7 +30,6 @@ export default function ProductListItem(props) {
                                             product={props.product}
                                             addToCart={props.addToCart}
                                             getTotal={props.getTotal}
-                                            onClick={() => {this.props.getTotal}}
                                             cart={props.cartItem}
                                         />
                                         {

@@ -43,7 +43,7 @@ class App extends Component {
   // Give discount
   giveDiscountHandler = () => {
       if(this.props.promoCode === 'DISCOUNT') {
-        if (this.props.cart === undefined || this.props.cart.length == 0) {
+        if (this.props.cart === undefined || this.props.cart.length === 0) {
           return 0
         } else {
           setTimeout(function() {
@@ -51,7 +51,7 @@ class App extends Component {
             var i = 0
             var totalPrice = 0
             for (i = 0; i < items.length; i++) {
-              var totalPrice = totalPrice + items[i].quantity * items[i].price
+              totalPrice = totalPrice + items[i].quantity * items[i].price
             }
     
             totalPrice -= 5 
@@ -73,7 +73,7 @@ class App extends Component {
         var i = 0
         var totalPrice = 0
         for (i = 0; i < items.length; i++) {
-          var totalPrice = totalPrice + items[i].quantity * items[i].price
+          totalPrice = totalPrice + items[i].quantity * items[i].price
         }
         
         this.setState({

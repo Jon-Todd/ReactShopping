@@ -2,10 +2,7 @@ const cartWithoutItem = (cart, item) => cart.filter(cartItem => cartItem.key !==
 const itemInCart = (cart, item) => cart.filter(cartItem => cartItem.key === item.key)[0]
 
 const addToCart = (cart, item) => {
-    console.log(cart);
-    console.log(item)
     const cartItem = itemInCart(cart, item)
-    console.log(cartItem)
     if (cartItem === undefined) {
         return [...cartWithoutItem(cart, item), { ...item, quantity: 1 }]
     } else {

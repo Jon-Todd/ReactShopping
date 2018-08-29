@@ -2,7 +2,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 // Import thunk 
 import thunk from 'redux-thunk';
-import cartReducer from './components/features/cart/cartreducer'
 import rootReducer from './reducers';
 
 
